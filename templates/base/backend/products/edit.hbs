@@ -1,0 +1,61 @@
+<div class="site_title">Cập nhật thông tin sản phẩm <a style="float:right;" href="/backoffice/products"><< Sản phẩm</a></div>
+<div class="site_content">
+<form method="post" id="editform" action="">
+<table width="100%" class="widget-tbl">
+  <tr>
+    <td width="150">Tên sản phẩm</td>
+    <td><input name="proName" type="text" id="proName" value="{{product.proName}}" style="width:98%;" /></td>
+    </tr>
+  <tr>
+    <td>Thông tin sản phẩm</td>
+    <td>
+        <textarea rows="16" name="proDesc" id="ckeditor" cols="147">{{product.proDesc}}</textarea>
+        <script type="text/javascript">
+            CKEDITOR.replace( 'ckeditor',
+            {
+                toolbar : 'Basic'
+            });
+        </script>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Danh mục sản phẩm</td>
+    <td>
+    <div class="widget-title"><input type="checkbox" name="category_all" value="all" id="checkall" />Tất cả</div>
+    <div class="widget-content" style="background:#FFFFFF; overflow:auto; height:75px;">
+
+      {{#each ../listcategories}}
+        {{#ifCond ../this.category "===" this._id}}
+          <input type="checkbox" name="category[]" value="{{this._id}}" class="checkall" /> {{this.Name}}<br />
+        {{/ifCond}}
+        <input type="checkbox" name="category[]" value="{{this._id}}" class="checkall" checked /> {{this.Name}}<br />
+      {{/each}}
+
+</div>
+	</td>
+  </tr>
+ 
+  <tr>
+    <td>Credits</td>
+    <td><input name="credits" type="text" id="credits" value="['click_pack']" /></td>
+  </tr>
+  <tr>
+    <td>Trạng thái</td>
+    <td>
+        <select name="proStatus">
+            <option value="Active"{{#ifCond product.proStatus "==" "Active"}} selected{{/ifCond}}>Kích hoạt</option>
+            <option value="Inactive"{{#ifCond product.proStatus "==" "Inactive"}} selected{{/ifCond}}>Tạm dừng</option>
+        </select>
+    </td>
+  </tr>
+  <tr>
+  	<td></td>
+    <td>
+	<input type="submit" name="create" value="Cập nhật" />
+    <input type="button" name="btn" value="Trở lại" onclick="history.back();" />
+    </td>
+  </tr>
+</table>
+</form>
+</div>

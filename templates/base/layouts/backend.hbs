@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{{settings.site_title}} - {{pagetitle}}</title>
+    
+    <link href="/backend/css/site.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/css/global.css" rel="stylesheet" type="text/css" />
+
+    {{!-- <script src="/assets/jquery.min.js"></script> --}}
+    <script type="text/javascript" src="/backend/js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="/backend/js/jquery-ui-1.9.1.custom.min.js"></script>
+    <script type="text/javascript" src="/backend/js/l2blockit.js"></script>
+    <script type="text/javascript" src="/backend/js/admin.js"></script>
+    <link rel="stylesheet" href="/backend/js/jquery.wysiwyg.css" type="text/css" />
+    <link rel="stylesheet" href="/backend/js/jquery.wysiwyg.modal.css" type="text/css" />
+    <link rel="stylesheet" href="/backend/js/jquery.simplemodal.css" type="text/css" />
+
+    <script src="/ckeditor/ckeditor.js"></script>
+    </script>
+    <link href="/backend/css/jquery-ui/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+    <script type="text/javascript">
+        $(function () {
+            $('ul li:has(ul)').hover(
+                function (e) {
+                    $(this).find('div').css({ display: "block" });
+                    $(this).find('ul').first().css({ display: "block" });
+                },
+                function (e) {
+                    $(this).find('div').css({ display: "none" });
+                    $(this).find('ul').first().css({ display: "none" });
+                }
+            );
+        });
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="header">
+            <div id="logo">
+                <a href="/backoffice"></a>
+            </div>
+            <div class="top-box">
+                Chào, <strong>{{customer.info.firstname}} {{customer.info.lastname}} ({{customer.email}})</strong>&nbsp; &bull; &nbsp;
+                <a href="/backoffice/administrators/edit/{{customer._id}}">{{__ 'Account'}}</a> &nbsp; &bull; &nbsp;
+                <a href="/backoffice/logout">{{__ 'Logout'}}</a>
+            </div>
+            <div class="clear"></div>
+            <div class="navbar">
+                {{> backend/nav}}
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="main_content">
+            {{{body}}}
+        </div>
+        {{> backend/footer}}
+    </div>
+</body>
+</html>

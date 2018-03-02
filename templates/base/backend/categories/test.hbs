@@ -1,0 +1,26 @@
+<div class="site_title">Testing Control <a style="float:right;" href="/backoffice/categories/add">{{__ 'Add New'}}</a></div>
+<div class="site_content">
+    <h1>List Category</h1>
+    
+    <ul>
+    {{#each getData.categories}}
+        <li id="{{this.id}}">{{this.name}} | Level: {{this.level}} | Status: {{this.status}}</li>
+        
+            {{#each this.childs}}
+                <li id="{{this.id}}" style="margin-left: 30px;">{{this.name}}</li>
+            {{/each}}
+        <hr />
+    {{/each}}
+    </ul>
+
+    <h1>List SubCategory</h1>
+    <ul>
+    {{#each getData.childs}}
+        <li>{{this.id}} <br /> 
+        Name: {{this.name}} <br /> 
+        Level: {{this.level}} <br /> 
+        Status: {{this.status}}</li>
+        <hr />
+    {{/each}}
+    </ul>
+</div>

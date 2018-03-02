@@ -1,0 +1,30 @@
+{ 
+    "_id" : ObjectId("5a28713986c7141e2021dc56"), 
+    "updatedAt" : ISODate("2017-12-06T22:37:45.550+0000"), 
+    "createdAt" : ISODate("2017-12-06T22:37:45.550+0000"), 
+    "status" : "Active", 
+    "roles" : "CUSTOMER", 
+    "newsletter" : true, 
+    "last_login_date" : ISODate("2017-12-06T22:37:45.426+0000"), 
+    "local" : {
+        "password" : "$2a$08$M/5nMZEiC.utC/NzRpyZ0eAmSdkC3jT0j7MCwHfR07.yFXDDJt7uK", 
+        "email" : "kazuyogurley5412q4m40@yahoo.com"
+    }, 
+    "info2" : {
+        "address" : "https://www.cialissansordonnancefr24.com/", 
+        "company" : "google", 
+        "countries" : [
+
+        ], 
+        "cities" : [
+
+        ]
+    }, 
+    "info1" : {
+        "fax" : "85668317285", 
+        "telephone" : "89645757935", 
+        "lastname" : "ThomasDientJG", 
+        "firstname" : "ThomasDient"
+    }, 
+    "__v" : NumberInt(0)
+}

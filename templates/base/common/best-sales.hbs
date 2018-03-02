@@ -1,0 +1,70 @@
+<div class="owl-carousel product_carousel">
+    {{#each bestsales}}
+    <div class="product-thumb clearfix">
+        <div class="image">
+            <a href="{{buildUrl 'san-pham' this.slug this._id}}"><img src="/files/products/{{this.thumbs.0.large}}" alt="{{this.name}}" title="{{this.name}}" style="height: 205px !important;" class="img-responsive" /></a>
+        </div>
+        <div class="caption">
+            <h4><a href="{{buildUrl 'san-pham' this.slug this._id}}">{{this.name}}</a></h4>
+            <p class="price">
+
+                <div id="price-default">
+                    {{#each this.price_range}}
+                        {{#if @last}}
+                            <span class="price-new">
+                                {{this.cost}}{{../../settings.currency_code}}
+                            </span>
+                        {{/if}}
+                    {{/each}} 
+                </div>
+
+                <div id="price-range">
+                    <table width="100%">
+                        <tr>
+                            {{#each this.price_range}}
+                                <td align="center">
+                                    <span class="price-new">{{formatCurrency this.cost}}{{../../settings.currency_code}}</span>
+                                    <span class="fromTo">{{this.from}} - {{this.to}}</span>
+                                </td>  
+                            {{/each}}  
+                        </tr>   
+                    </table>                  
+                </div>
+            </p>
+            <div class="rating">
+                <span class="fa fa-stack">
+                    <i class="fa fa-star fa-stack-2x"></i>
+                    <i class="fa fa-star-o fa-stack-2x"></i>
+                </span>                
+                <span class="fa fa-stack">
+                    <i class="fa fa-star fa-stack-2x"></i>
+                    <i class="fa fa-star-o fa-stack-2x"></i>
+                </span>                
+                <span class="fa fa-stack">
+                    <i class="fa fa-star fa-stack-2x"></i>
+                    <i class="fa fa-star-o fa-stack-2x"></i>
+                </span>                
+                <span class="fa fa-stack">
+                    <i class="fa fa-star fa-stack-2x"></i>
+                    <i class="fa fa-star-o fa-stack-2x"></i>
+                </span>                
+                <span class="fa fa-stack">
+                    <i class="fa fa-star-o fa-stack-2x"></i>
+                </span> 
+            </div>
+        </div>
+        <div class="button-group">
+            <button class="btn-primary" type="button" onClick="window.location='{{buildUrl 'san-pham' this.slug this._id}}'; "><span>{{__ 'Buy now'}}</span></button>
+            <div class="add-to-links">
+                <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
+                <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{#ifCond bestsales.length "<=" 0}}
+<div class="not-HasProduct col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    {{__ 'Currently, we do not have any products'}}
+</div>
+{{/ifCond}}

@@ -1,0 +1,151 @@
+<div class="site_title">Danh sách sản phẩm <a style="float:right;" href="/backoffice/products/add-product">{{__ 'Add New'}}</a></div>
+<div class="site_content">
+    {{#if error_msg}}
+    <div class="error_box">
+        {{error_msg}}
+    </div>
+    {{/if}}
+    <div class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+            <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="javascript:void(0);" onclick="$('#search-content').slideToggle();" style="cursor:pointer">Tìm kiếm nhanh</a></li>
+        </ul>
+        <div class="ui-tabs-panel ui-widget-content ui-corner-bottom" id="search-content" style="display:none">
+            <form method="post">
+                <input type="hidden" name="do" value="search" />
+                <table width="100%" class="widget-tbl">
+                    <tr>
+                        <td align="right">Người tạo:</td>
+                        <td>
+                            <select name="owner" onchange="selectowner();" id="owner">
+                        <option value="">Tất cả</option>
+                        <option value="single" selected>single member</option>
+                        <option value="selfsponsored">self-sponsored</option>
+                        </select>
+                        </td>
+                        <td align=" right ">Danh mục:</td>
+                        <td>
+                            <select name="category ">
+                    	        <option value="">Tất cả</option>
+						        <option value="1" selected>Danh mục 1</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Trạng thái</td>
+                        <td>
+                            <select name="status">
+                            <option value="">Tất cả</option>
+                            <option value='Active' selected>Đang sử dụng</option>
+                            <option value='Inactive'>Không sử dụng</option>
+                        </select>
+                        </td>
+                        <td align="right">Đường dẫn:</td>
+                        <td><input type="text" name="url" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="center"><input type="submit" name="send" value="Tìm kiếm">
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+
+    <form method="post" action="#">
+        <table width="100%" class="widget-tbl">
+            <tr class="titles">
+                <td width="20"><input type="checkbox" id="checkall"></td>
+                <td align="center">Hình</td>
+                <td align="center">Thông tin sản phẩm</td>
+                <td align="center">Giá thường</td>
+                <td align="center">Giá KM</td>
+                <td align="center">Trạng thái</td>
+                <td></td>
+            </tr>
+
+            {{#if totalProduct}}
+                {{#each products}}
+                <tr class="tr2 normal_linetbl">
+                    <td align="center"><input type="checkbox" name="mid[]" value="{{this._id}}" class="checkall" /></td>
+                    <td>
+                        <a href="/backoffice/products/edit/{{this._id}}"><img src="/files/products/{{this.thumbs.0.small}}" style="width: 80px;" /></a>
+                    </td>
+                    <td>{{pages}}
+                        <strong>SKU: {{this.sku}}</strong><br />
+                        {{this.name}}<br>
+                        <span style="font-size:11px"><a href="/backoffice/categories/edit/{{this.categories}}" target="_blank" style="color:#CC66CC">{{getCategoryName this.categories}}</a></span>
+                    </td>
+                    <td align="center">
+                        <span style="color:#990000">{{formatCurrency this.price_range.0.cost}}</span>
+                    </td>
+                    <td align="center">
+                        <span style="color:#009900">{{formatCurrency this.sales}}</span>
+                    </td>
+                    <td align="center"><span style="color: {{#ifCond this.status "===" "ACTIVE"}}#009900{{else}}#990000{{/ifCond}}">{{#ifCond this.status "===" "ACTIVE"}}Kích hoạt{{else}}Tạm dừng{{/ifCond}}</span></td>
+                    <td align="center">
+                        <a href="/backoffice/products/edit/{{this._id}}"><img src="/backend/css/images/edit.png" border="0" title="Cập nhật sản phẩm" /></a>
+                    </td>
+                </tr>
+                {{/each}}
+            {{else}}
+            <tr>
+                <td colspan="9" align="center">Chưa có sản phẩm trong cơ sở dữ liệu.</td>
+            </tr>
+            {{/if}}
+
+        </table>
+        <div style="margin-top:10px">
+
+            <input type="button" value="&larr; Quay lại" 
+            {{#ifCond totalPages "===" 1}}
+                disabled class="btn-disabled"
+            {{else}}
+                {{#ifCond currentPage "===" 1}}
+                    disabled class="btn-disabled"
+                {{else}}
+                    onclick="location.href='#'" 
+                {{/ifCond}}
+            {{/ifCond}} />
+
+            <input type="button" value="Tiếp theo &rarr;" 
+            {{#ifCond totalPages "===" 0}}
+                disabled class="btn-disabled"
+            {{else}}
+                {{#ifCond totalPages "===" currentPage}}
+                    disabled class="btn-disabled"
+                {{else}}
+                    onclick="location.href='#'" 
+                {{/ifCond}}
+            {{/ifCond}} />
+
+            {{#ifCond totalProduct ">" 1}}
+            <div style="float:right">
+                Chuyển đến trang:
+                <select name="p" style="min-width:inherit;" id="pagid" onchange="gotopage(this.value)">
+                    
+                </select>
+                <script type="text/javascript">
+                    function gotopage(pageid) {
+                        location.href = pageid;
+                    }
+                </script>
+            </div>
+            <div class="clear"></div>
+            {{/ifCond}}
+
+        </div>
+        {{#ifCond totalProduct ">" 0}}
+        <div class="widget-title" style="margin-top:5px">Chức năng</div>
+        <div class="widget-content">
+            <select name="a">
+            	<option value="">Chọn tác vụ</option>
+                <option value="delete">Xóa (không thể phục hồi)</option>
+                <option value="Active">Kích hoạt sử dụng</option>
+                <option value="Inactive">Hủy kích hoạt sử dụng</option>
+            </select>
+            <input type="submit" name="action" value="Thực hiện" />
+        </div>
+        {{/ifCond}}
+        <input type="hidden" name="sesion_id" value="fđ54htjh6785jhgj7867ùghjgj" />
+    </form>
+</div>

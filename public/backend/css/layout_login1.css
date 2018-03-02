@@ -1,0 +1,66 @@
+body {
+    line-height: 25px;
+}
+
+#wrapper {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.box {
+    margin-top: 20px;
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid #d7d7d7;
+}
+
+#logo {
+    background: url(images/logo.png) no-repeat;
+    width: 333px;
+    height: 60px;
+    float: left;
+}
+
+.title {
+    color: #ffffff;
+    background: #4c4c4c;
+    padding: 2px 10px;
+}
+
+.pincode_box {
+    float: left;
+    width: 102px;
+    margin-right: 5px;
+}
+.pincode_button {
+	float: left;
+	border: 1px solid #e0e0e0;
+	cursor: pointer;
+	background: #fcfcfc;
+	color: #707070;
+	margin: 0px;
+	width: 30px;
+	text-align: center;
+	margin: 1px;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+
+.pincode_button:hover {
+	background: #ffffff;
+}
+
+.pincode_clear {
+	float: left;
+	border: 1px solid #c62020;
+	cursor: pointer;
+	background: #c62020;
+	color: #ffffff;
+	margin: 1px;
+	width: 62px;
+	text-align: center;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}

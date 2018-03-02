@@ -1,0 +1,160 @@
+<div class="site_title">Danh sách quản trị viên</div>
+<div class="site_content">
+    {{#if error_msg}}
+        <div class="error_box">{{error_msg}}</div>
+    {{/if}}
+<div class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+            <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="javascript:void(0);" onclick="$('#search-content').slideToggle();" style="cursor:pointer">Tìm kiếm</a></li>
+            <li class="ui-state-default ui-corner-top"><a href="./?view=administrators&add=newadmin" style="cursor:pointer" class="ui-tabs-anchor">Tạo tài khoản Quản trị mới</a></li>
+        </ul>
+
+        <div class="ui-tabs-panel ui-widget-content ui-corner-bottom" id="search-content" ";echo !$adlink ? "style="display:none"" : "";echo ">
+        	<form method="post">
+                <input type="hidden" name="do" value="Tìm kiếm" />
+                <table width="100%" class="widget-tbl">
+                    <tr>
+                        <td align="right">Tên đăng nhập:</td>
+                        <td><input type="text" name="username" value="username" /></td>
+                        <td align="right">Hòm thư:</td>
+                        <td><input type="text" name="email" value="email" /></td>
+                    </tr>
+                        <tr>
+                            <td align="right">Đăng nhập cuối:</td>
+                            <td><input type="text" name="last_login" value="last_login" class="datepicker" /></td>
+                            <td align="right">Tình trạng</td>
+                            <td>
+                            	<select name="status">
+                    				<option value="">TẤT CẢ</option>
+									{{#each statusvalues}}
+										{{#if this == status}}
+											<option value='v' selected>v</option>
+										{{/if}}
+									<option value='v'>v</option>
+									{{/each}}
+						        </select>
+                            </td>
+                        </tr>
+                        <tr>
+                             <td colspan="4" align="center"><input type="submit" name="send" value="Bắt đầu"></td>
+                        </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <form method="post" action="paginator->gotopage()">
+		<table width="100%" class="widget-tbl">
+            <tr class="titles">
+                <td width="20"><input type="checkbox" id="checkall"></td>
+                <td>Tên đăng nhập</td>
+                <td>Hòm thư</td>
+                <td align="center">Đăng nhập cuối</td>
+                <td align="center">Trạng thái</td>
+                <td></td>
+            </tr>
+
+			{{#each admin}}
+	        <tr class="tr normal_linetbl">
+			    <td align="center"><input type="checkbox" name="mid[]" value="id" class="checkall" /></td>
+			    <td>username</td>
+			    <td>email</td>
+			    <td align="center">last_login</td>
+                <td align="center"><span style="color:
+					{{#switch status }}
+						case "enable":
+							echo "#009900";
+							break;
+						case "disable":
+							echo "#990000";
+							break;
+						default :
+							echo "#996600";
+							break;
+					}
+				">status</span>
+				</td>
+		        <td align="center">
+			        <a href="./?view=administrators&edit=id><img src="./css/images/edit.png" title="Cập nhật quản trị viên này" border="0" /></a>
+			        <a href="javascript:void(0);" onClick="openWindows('<span style='font-weight:normal'>Thông tin chi tiết</span> username', 'info-id');"><img src="./css/images/info.png" title="Thông tin chi tiết" border="0" /></a>
+			        <div id="info-id" style="display:none">
+				        <table width="100%" class="widget-tbl">
+				            <tr>
+				                <td align="right" width="25%">Họ tên:</td>
+				                <td width="25%"><strong>fullname</strong></td>
+				                <td align="right" width="25%">Hòm thư:</td>
+				                <td width="25%" style="color:#000099">email</td>
+				            </tr>
+				            
+				            <tr>
+				                <td align="right">Ngày tham gia:</td>
+				                <td style="color:#000099">created</td>
+				                <td align="right">Đăng nhập cuối:</td>
+				                <td style="color:#000099">last_login</td>
+				            </tr>
+				            <tr>
+				                <td align="right">Quản trị ghi chú:</td>
+				                <td colspan="3" style="color:#990033">notes</td>
+				            </tr>
+				        </table>
+			        </div>
+			       </td>
+			    </tr>
+			{{/each}}
+
+
+{{#ifCond totalResults == 0}}
+	<tr>
+         <td colspan="8" align="center">Chưa có dữ liệu</td>
+    </tr>
+{{/ifCond}}
+
+</table>
+            <div style="margin-top:10px">
+            <input type="button" value="&larr; Trở lại" ";
+echo ($paginator->totalPages() == 1 || $paginator->getPage() == 1) ? "disabled class="btn-disabled"" : "onclick="location.href='" . $paginator->prevpage() . "';";" />
+
+            <input type="button" value="Tiếp theo &rarr;" ";echo ($paginator->totalPages() == 0 || $paginator->totalPages() == $paginator->getPage()) ? "disabled class="btn-disabled"" : "onclick="location.href='" . $paginator->nextpage() . "';";";echo " />";
+
+			{{#ifCond 1 < totalPages}}
+			<div style="float:right">Di chuyển đến trang:
+		        <select name="p" style="min-width:inherit;" id="pagid" onchange="gotopage(this.value)">
+				$i = 1;
+
+				while ($i <= $paginator->totalPages()) {
+					if ($i == $paginator->getPage()) {
+						<option selected value="paginator->gotopage($i)">i</option>
+					}
+					else {
+						<option value="gotopage($i)">$i</option>
+					}
+					++$i;
+				}
+
+			</select>
+            <script type="text/javascript">
+                function gotopage(pageid){
+                    location.href=pageid;
+                }
+            </script>
+            </div>
+            <div class="clear"></div>
+			{{/ifCond}}
+
+	    </div>
+
+        {{#if (0 < paginator->totalPages}}
+            <div class="widget-title" style="margin-top:5px">Hành động</div>
+            <div class="widget-content">
+                <select name="a">
+                    <option value="">Chọn một hành động</option>
+                    <option value="delete">Xóa (không thể phục hồi)</option>
+                    <option value="disable">Khóa lại</option>
+                    <option value="enable">Kích hoạt</option>
+                </select>
+                <input type="submit" name="action" value="Thực hiện" />
+            </div>
+        {{/if}}
+	    <input type="hidden" name="sesion_id" value="sesion_id />
+    </form>
+</div>

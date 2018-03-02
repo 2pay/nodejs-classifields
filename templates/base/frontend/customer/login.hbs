@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    var RecaptchaOptions = {
+        theme: 'clean',
+        lang: 'en'
+    };
+</script>
+<div id="container">
+    <div class="container">
+        <!-- Breadcrumb Start-->
+        <ul class="breadcrumb">
+            <li><a href="/"><i class="fa fa-home"></i></a></li>
+            <li><a href="/khach-hang/dang-nhap">{{{__ "Customer Login"}}}</a></li>
+        </ul>
+        <!-- Breadcrumb End-->
+        <div class="row">
+            <!--Middle Part Start-->
+            <div id="content" class="col-sm-9">
+                <h1 class="title">Khách hàng đăng nhập</h1>
+                <div class="row">
+                    {{#if hasErrors}}
+                    <div class="alert alert-danger">
+                        {{#each messages}}
+                        <p>{{this}}</p>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                    <div class="col-sm-6">
+                        <h2 class="subtitle">Đăng nhập bằng tài khoản mạng xã hội </h2>
+                        <p style="margin-top:20px;padding-top: 20px;">
+                            <a style="margin-bottom: 20px;background: #3b5998;border-color: #3b5998;" class="btn btn-danger btn-block" href="/khach-hang/facebook">Đăng nhập bằng Facebook</a>
+                            <a class="btn btn-danger btn-block" href="/khach-hang/google">Đăng nhập bằng Google</a>
+                        </p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <form method="post" action="/khach-hang/dang-nhap">
+                            <h2 class="subtitle">Khách hàng đăng nhập</h2>
+                            <p><strong>Nếu quý khách hàng đã có tài khoản trước đó vui lòng nhâp thông tin vào bến dưới để đăng nhập hệ thống.</strong></p>
+                            <div class="form-group">
+                                <label class="control-label" for="input-email">Địa chỉ E-Mail</label>
+                                <input type="text" name="email" value="" placeholder="Xin mời nhập địa chỉ E-Mail" id="input-email" class="form-control"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="input-password">Mật khẩu đăng nhập</label>
+                                <input type="password" name="password" value="" placeholder="Nhập mật khẩu của quý khách" id="input-password" class="form-control"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <a href="/khach-hang/quen-mat-khau">Quý khách quên mật khẩu và muốn khôi phục ngay?</a>
+                            </div>
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+                            <input type="submit" value="Đăng nhập" class="btn btn-primary" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--Middle Part End -->
+            <!--Right Part Start -->
+            {{> right-account}}
+            <!--Right Part End -->
+        </div>
+    </div>
+</div>

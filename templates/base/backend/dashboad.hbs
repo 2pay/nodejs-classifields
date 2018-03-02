@@ -1,0 +1,85 @@
+<div class="site_title">Dashboard</div>
+<div class="site_content">
+    <div class="widget-title">Thông tin quản trị viên!</div>
+    <div class="widget-content">
+        <div class="admin-info">
+            <div class="title">{{customer.info1.firstname}} {{customer.info1.lastname}}</div>
+            <div>Quyền hạn: {{customer.roles}}</div>
+            <div>Email: {{customer.email}}</div>
+            <div>Đăng nhập gần đây: {{format_date customer.lastLogin 'DD/MM/YYYY, h:mm:ss A'}}</div>
+        </div>
+        <div class="calendar">
+            <div class="top corner-top">
+                <div style="font-size:14px">{{getDayName}}</div>
+                {{getDay}}</div>
+            <div class="bottom corner-bottom">{{getMonthName}}</div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="dashboardbox corner-all">
+        <a href="./?view=manageptc&do=search&status=Pending">20 Đơn hàng đang chờ xử lý</a>
+    </div>
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Statistics</a></li>
+            <li><a href="#tabs-2">Login Failures</a></li>
+            <li><a href="#tabs-3">Site Information</a></li>
+            <li><a href="#tabs-4">Product Information</a></li>
+            <li><a href="#tabs-5">WefunyShopping News <strong>2</strong></a>
+        </ul>
+
+        <div id="tabs-1">
+            {{> backend/statistics}}
+        </div>
+
+        <div id="tabs-2">
+            <div style="margin-bottom:5px;"><input type="button" value="View all" onclick="location.href='?view=loginlog';"></div>
+            <div class="error_login">
+                <div class="title">admin</div>
+                <div><strong>User Agent:</strong> Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
+                    Chrome/57.0.2987.98 Safari/537.36</div>
+                <div><strong>IP Address:</strong> 127.3.77.1</div>
+                <div><strong>Date:</strong> 18 Mar 2017 06:49 PM (<span>1h 7m 34s</span>)</div>
+            </div>
+            No information available in this view
+        </div>
+
+        <div id="tabs-3">
+            {{> backend/site_information}}
+        </div>
+
+        <div id="tabs-4">
+            {{> backend/product_information}}
+        </div>
+
+        <div id="tabs-5">
+            <form id="msg1" onsubmit="return submitform(this.id);">
+                <input type="hidden" name="do" value="delete_news" />
+                <input type="hidden" name="nid" value="1" />
+                <fieldset class="news-important" style="line-height:normal">
+                    <legend>Published on 26th Feb, 2014 a 06:05 am</legend>
+                    <div style="font-weight:bold; padding-bottom:5px; font-size:12px;\">New Addon - Okpay Module</div>
+                    Today we have added Okpay payment module in our addon list. Now you can add this payment processor to your ptc website. The
+                    price for Okpay module is 39$.
+                    <div style="padding-top:5px">
+                        <input type="submit" name="btn" value="Delete this news" />
+                    </div>
+                </fieldset>
+            </form>
+
+            <form id="msg1" onsubmit="return submitform(this.id);">
+                <input type="hidden" name="do" value="delete_news" />
+                <input type="hidden" name="nid" value="1" />
+                <fieldset class="news-normal" style="line-height:normal">
+                    <legend>Published on 26th Feb, 2014 a 06:05 am</legend>
+                    <div style="font-weight:bold; padding-bottom:5px; font-size:12px;\">New Addon - Okpay Module</div>
+                    Today we have added Okpay payment module in our addon list. Now you can add this payment processor to your ptc website. The
+                    price for Okpay module is 39$.
+                    <div style="padding-top:5px">
+                        <input type="submit" name="btn" value="Delete this news" />
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

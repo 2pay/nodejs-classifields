@@ -1,0 +1,245 @@
+<div class="site_title">Danh mục loại sản phẩm <a style="float:right;" href="/backoffice/categories/add">{{__ 'Add New'}}</a></div>
+<div class="site_content">
+    {{#if sessionFlash.messages }}
+		{{#if sessionFlash.isArray}}
+			<div class="{{ sessionFlash.type}}_box">
+				{{#each sessionFlash.messages}}
+					{{{this}}}
+				{{/each}}
+			</div>
+		{{else}}
+			<div class="{{ sessionFlash.type}}_box">
+				{{{sessionFlash.messages}}}
+			</div>
+		{{/if}}
+	{{/if}}
+    <div class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+            <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="javascript:void(0);" onclick="$('#search-content').slideToggle();" style="cursor:pointer">{{__ 'Search'}}</a></li>
+            <li class="ui-state-default ui-corner-top"><a href="/backoffice/categories/add" style="cursor:pointer" class="ui-tabs-anchor">{{__ 'Create a new category'}}</a></li>
+        </ul>
+        <div class="ui-tabs-panel ui-widget-content ui-corner-bottom" id="search-content" style="display:none">
+            <form method="post">
+                <input type="hidden" name="do" value="search" />
+                <table width="100%" class="widget-tbl">
+
+                    <tr>
+                        <td align="right">{{__ 'Category Name'}}</td>
+                        <td><input type="text" name="name" value="" /></td>
+                        <td align="right">{{__ 'Status'}}</td>
+                        <td>
+                            <select name="status">
+                                <option value="">{{__ 'All'}}</option>
+                                <option value='ACTIVE' selected>{{__ 'Activated'}}</option>
+                                <option value='INACTIVE'>{{__ 'Inactive'}}</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" align="center"><input type="submit" name="send" value="{{__ 'Search'}}">
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <form method="post" action="#">
+        <table width="100%" class="widget-tbl">
+            <tr class="titles">
+                <td align="center" width="20"><input type="checkbox" id="checkall"></td>
+                <td align="center">{{__ 'Category Name'}}</td>
+                <td></td>
+            </tr>
+
+            {{#if totalCategory}}
+
+                {{#each categories}}
+
+                        <tr class="tr2 normal_linetbl">
+                            <td width="4%" align="center"><input type="checkbox" name="mid[]" value="{{this._id}}" class="checkall" /></td>
+                            <td width="70%">
+                                <strong>+ {{this.name}}</strong> | 
+                                <span style="color: {{#ifCond this.status "===" "ACTIVE"}}#009900{{else}}#990000{{/ifCond}}">
+                                    {{#ifCond this.status "===" "ACTIVE"}}
+                                        {{__ 'Activated'}}
+                                    {{else}}
+                                        {{__ 'Inactive'}}
+                                    {{/ifCond}}
+                                </span><br />
+
+                                {{#each ../childs}}
+                                    {{#ifCond this.level "===" 2}}
+										{{#indexOf ../this._id this.child}}
+
+                                        <table width="95%" style="margin-left:20px;" class="widget-tbl">
+                                            <tr class="tr2 normal_linetbl">
+                                                <td width="4%" align="center"><input type="checkbox" name="mid[]" value="{{this._id}}" class="checkall" /></td>
+                                                <td>
+                                                    <strong>+ {{this.name}}</strong> | 
+                                                    <span style="color: {{#ifCond this.status "===" "ACTIVE"}}#009900{{else}}#990000{{/ifCond}}">
+                                                        {{#ifCond this.status "===" "ACTIVE"}}
+                                                            {{__ 'Activated'}}
+                                                        {{else}}
+                                                            {{__ 'Inactive'}}
+                                                        {{/ifCond}}
+                                                    </span><br />
+
+                                                        {{#each ../../childs}}
+												            {{#ifCond this.level "===" 3}}
+													            {{#indexOf ../this._id this.child}}
+                                                                    <table width="95%" style="margin-left:20px;" class="widget-tbl">
+                                                                        <tr class="tr2 normal_linetbl">
+                                                                            <td width="4%" align="center"><input type="checkbox" name="mid[]" value="{{this._id}}" class="checkall" /></td>
+                                                                            <td width="56%">
+                                                                                {{this.name}} | 
+                                                                                <span style="color: {{#ifCond this.status "===" "ACTIVE"}}#009900{{else}}#990000{{/ifCond}}">
+                                                                                    {{#ifCond this.status "===" "ACTIVE"}}
+                                                                                        {{__ 'Activated'}}
+                                                                                    {{else}}
+                                                                                        {{__ 'Inactive'}}
+                                                                                    {{/ifCond}}
+                                                                                </span><br />
+
+                                                                                {{#each ../../../childs}}
+                                                                                    {{#ifCond this.level "===" 4}}
+                                                                                        {{#indexOf ../this._id this.child}}
+                                                                                            
+
+                                                                                            <table width="95%" style="margin-left:20px;" class="widget-tbl">
+                                                                                                <tr class="tr2 normal_linetbl">
+                                                                                                    <td width="4%" align="center"><input type="checkbox" name="mid[]" value="{{this._id}}" class="checkall" /></td>
+                                                                                                    <td>{{this.name}} | 
+                                                                                                        <span style="color: {{#ifCond this.status "===" "ACTIVE"}}#009900{{else}}#990000{{/ifCond}}">
+                                                                                                            {{#ifCond this.status "===" "ACTIVE"}}
+                                                                                                                {{__ 'Activated'}}
+                                                                                                            {{else}}
+                                                                                                                {{__ 'Inactive'}}
+                                                                                                            {{/ifCond}}
+                                                                                                        </span><br />
+
+                                                                                                    </td>
+                                                                                                    <td width="15%" align="center">
+                                                                                                        <a href="/backoffice/categories/edit/{{this._id}}"><img src="/backend/css/images/edit.png" border="0" title="Cập nhật danh mục" /></a>
+                                                                                                        <a onclick="return confirm('Bạn thực sự muốn xóa danh mục: {{this.name}}?');" href="/backoffice/categories/delete/{{this._id}}"><img src="/backend/css/images/trash.png" border="0" title="Xóa danh mục" /></a>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </table>
+
+
+                                                                                        {{/indexOf}}
+                                                                                    {{/ifCond}}
+                                                                                {{/each}}
+                                                                            
+                                                                            </td>
+                                                                            <td width="12%" align="center">
+                                                                                <a href="/backoffice/categories/add/{{this._id}}:{{this.level}}"><img src="/backend/css/images/add.png" border="0" title="Thêm danh mục con" /></a>
+                                                                                <a href="/backoffice/categories/edit/{{this._id}}"><img src="/backend/css/images/edit.png" border="0" title="Cập nhật danh mục" /></a>
+                                                                                <a onclick="return confirm('Bạn thực sự muốn xóa danh mục: {{this.name}}?');" href="/backoffice/categories/delete/{{this._id}}"><img src="/backend/css/images/trash.png" border="0" title="Xóa danh mục" /></a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                {{/indexOf}}
+                                                            {{/ifCond}}
+                                                        {{/each}}
+
+                                                </td>
+                                                <td width="12%" align="center">
+                                                    <a href="/backoffice/categories/add/{{this._id}}:{{this.level}}"><img src="/backend/css/images/add.png" border="0" title="Thêm danh mục con" /></a>
+                                                    <a href="/backoffice/categories/edit/{{this._id}}"><img src="/backend/css/images/edit.png" border="0" title="Cập nhật danh mục" /></a>
+                                                    <a onclick="return confirm('Bạn thực sự muốn xóa danh mục: {{this.name}}?');" href="/backoffice/categories/delete/{{this._id}}"><img src="/backend/css/images/trash.png" border="0" title="Xóa danh mục" /></a>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        {{/indexOf}}
+                                    {{/ifCond}}
+                                {{/each}}
+
+                            </td>
+                            <td width="5%" align="center">
+                                <a href="/backoffice/categories/add/{{this._id}}:{{this.level}}"><img src="/backend/css/images/add.png" border="0" title="Thêm danh mục con" style="margin-bottom: 10px;" /></a>
+                                <a href="/backoffice/categories/edit/{{this._id}}"><img src="/backend/css/images/edit.png" border="0" title="Cập nhật danh mục" style="margin-bottom: 10px;" /></a>
+                                <a onclick="return confirm('Bạn thực sự muốn xóa danh mục: {{this.name}}?');" href="/backoffice/categories/delete/{{this._id}}"><img src="/backend/css/images/trash.png" border="0" title="Xóa danh mục" /></a>
+                            </td>
+                        </tr>
+
+                {{/each}}
+
+            {{else}}
+                <tr>
+                    <td colspan="9" align="center">Chưa có danh mục sản phẩm.</td>
+                </tr>
+            {{/if}}
+
+        </table>
+        <div style="margin-top:10px">
+
+            <input type="button" value="&larr; Quay lại"
+            {{#ifCond totalPages "===" 1}}
+                disabled class="btn-disabled"
+            {{else}}
+                {{#ifCond currentPage "===" 1}}
+                    disabled class="btn-disabled"
+                {{else}}
+                    onclick="location.href='?page={{prevPage}}'"
+                {{/ifCond}}
+            {{/ifCond}} />
+
+            <input type="button" value="Tiếp theo &rarr;"
+            {{#ifCond totalPages "===" 0}}
+                disabled class="btn-disabled"
+            {{else}}
+                {{#ifCond totalPages "===" currentPage}}
+                    disabled class="btn-disabled"
+                {{else}}
+                    onclick="location.href='?page={{nextPage}}'"
+                {{/ifCond}}
+            {{/ifCond}} />
+
+            {{#ifCond totalPages ">" 1}}
+            <div style="float:right">
+                Chuyển đến trang:
+                <select name="p" style="min-width:inherit;" id="pagid" onchange="gotopage(this.value)">
+
+                    <script type="text/javascript">
+                        var cPage = parseInt("{{currentPage}}");
+                        var tPage = parseInt("{{totalPages}}") + 1;
+                        var text = "";
+                        for (var i=1;i<tPage;i++) {
+                            if (cPage === i) {
+                                text += '<option value="' + i + '" selected>' + i +  '</option>';
+                            } else {
+                                text += '<option value="' + i + '">' + i +  '</option>';
+                            }
+
+                        }
+                        document.getElementById("pagid").innerHTML = text;
+                    </script>
+
+                </select>
+                <script type="text/javascript">
+                    function gotopage(pageNumber) {
+                        location.href = '?page=' + pageNumber;
+                    }
+                </script>
+            </div>
+            <div class="clear"></div>
+            {{/ifCond}}
+
+        </div>
+        {{#ifCond totalCategory ">" 0}}
+        <div class="widget-title" style="margin-top:5px">Chức năng</div>
+        <div class="widget-content">
+            <select name="a">
+                <option value="">Chọn tác vụ</option>
+                <option value="delete">Xóa (không thể phục hồi)</option>
+                <option value="Active">Kích hoạt sử dụng</option>
+                <option value="Inactive">Hủy kích hoạt sử dụng</option>
+            </select>
+            <input type="submit" name="action" value="Thực hiện" />
+        </div>
+        {{/ifCond}}
+        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+    </form>
+</div>

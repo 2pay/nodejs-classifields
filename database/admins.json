@@ -1,0 +1,18 @@
+{ 
+    "_id" : ObjectId("5a0e3d5bd8d9d91ef8e0d461"), 
+    "updatedAt" : ISODate("2017-12-09T01:12:33.193+0000"), 
+    "createdAt" : ISODate("2017-11-17T01:37:31.927+0000"), 
+    "lastLogin" : "Sat Dec 09 2017 08:12:33 GMT+0700 (SE Asia Standard Time)", 
+    "lastIp" : "::1", 
+    "status" : "ACTIVE", 
+    "roles" : "ADMIN", 
+    "pincode" : "$2a$10$zoC0CudcMZnw28r4bsWajOReMppGRewHIULrXnCQ1WP9B4HHsbcTi", 
+    "password" : "$2a$08$5aYY4Ooc7WL0BQ3TJLOGD.GEIU4cCBPPXzV9dfT.lP/DbU5WCUpfK", 
+    "email" : "cnttlc@gmail.com", 
+    "info" : {
+        "phone" : "0963098800", 
+        "lastname" : "Vũ Văn", 
+        "firstname" : "Dũng"
+    }, 
+    "__v" : NumberInt(0)
+}

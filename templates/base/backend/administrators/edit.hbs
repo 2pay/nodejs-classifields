@@ -1,0 +1,112 @@
+<div class="site_title">Cập nhật tài khoản</div>
+<div class="site_content">
+
+	{{#if sessionFlash.message }}
+	<div class="{{ sessionFlash.type}}_box">
+		{{sessionFlash.message}}
+	</div>
+	{{/if}}
+
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabs-1">{{__ 'General'}}</a></li>
+			<li><a href="#tabs-2">{{__ 'Update Password'}}</a></li>
+			<li><a href="#tabs-3">{{__ 'Update PIN'}}</a></li>
+		</ul>
+		<div id="tabs-1">
+			<form method="post" id="editInfo" action="/backoffice/administrators/edit/{{administrator._id}}" id="frm">
+				<input type="hidden" name="a" value="info" />
+				<table width="100%" class="widget-tbl">
+					<tr>
+						<td align="right" width="210">{{__ 'First Name:'}}</td>
+						<td>
+							<input name="firstname" type="text" size="30" value="{{administrator.info.firstname}}" placeholder="{{__ 'Input your first name'}}" />
+						</td>
+						<td>{{__ 'Last Name:'}}</td>
+						<td><input name="lastname" type="text" size="30" value="{{administrator.info.lastname}}" placeholder="{{__ 'Input your last name'}}" /></td>
+					</tr>
+
+					<tr>
+						<td align="right">{{__ 'Phone:'}}</td>
+						<td>
+							<input name="phone" type="text" size="30" value="{{administrator.info.phone}}" placeholder="{{__ 'Input your phone number'}}" />
+						</td>
+						<td>{{__ 'Roles'}}</td>
+						<td>
+							<select name="roles">
+                                <option value="ADMIN" {{#ifCond administrator.roles "===" "ADMIN"}}selected{{/ifCond}}>{{__ 'Administrator'}}</option>
+                                <option value="MOD" {{#ifCond administrator.roles "===" "MOD"}}selected{{/ifCond}}>{{__ 'Moderator'}}</option>
+                            </select>
+						</td>
+					</tr>
+
+					<tr>
+						<td align="right">{{__ 'Status'}}</td>
+						<td colspan="3">
+							<select name="status">
+								<option value="ACTIVE" {{#ifCond administrator.status "===" "ACTIVE"}}selected{{/ifCond}}>{{__ 'Active'}}</option>
+								<option value="INACTIVE" {{#ifCond administrator.status "===" "INACTIVE"}}selected{{/ifCond}}>{{__ 'Inactive'}}</option>
+								<option value="SUSPENDED" {{#ifCond administrator.status "===" "SUSPENDED"}}selected{{/ifCond}}>{{__ 'Suspended'}}</option>
+							</select>
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan="4" align="center">
+							<input type="hidden" name="_csrf" value="{{ csrfToken }}">
+							<input type="button" name="btn" value="{{__ 'Return'}}" onclick="history.back();" />
+							<input type="submit" name="send" value="{{__ 'Update Info'}}" />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="tabs-2">
+			<div class="info_box">{{__ 'Password must be at least'}} {{settings.passwordLenght}} {{__ 'strings'}}.</div>
+			<form method="post" id="editPassword" action="/backoffice/administrators/edit/{{administrator._id}}">
+				<input type="hidden" name="a" value="password" />
+				<table width="100%" class="widget-tbl">
+					<tr>
+						<td align="right">{{__ 'New Password:'}}</td>
+						<td><input name="new_password" type="password" size="30" /></td>
+					</tr>
+					<tr>
+						<td align="right">{{__ 'Confirm Password'}}</td>
+						<td><input name="new_password2" type="password" size="30" /></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<input type="hidden" name="_csrf" value="{{ csrfToken }}">
+							<input type="button" name="btn" value="{{__ 'Return'}}" onclick="history.back();" />
+							<input type="submit" name="send" value="{{__ 'Update Password'}}" />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+
+		<div id="tabs-3">
+			<div class="info_box">{{__ 'PIN must be at least'}} {{settings.passwordLenght}} {{__ 'strings'}}.</div>
+			<form method="post" id="frm3" action="/backoffice/administrators/edit/{{administrator._id}}">
+				<input type="hidden" name="a" value="pincode" />
+				<table width="100%" class="widget-tbl">
+					<tr>
+						<td align="right">{{__ 'New PIN:'}}</td>
+						<td><input name="newpin_code" type="password" size="6" /></td>
+					</tr>
+					<tr>
+						<td align="right">{{__ 'Confirm New PIN:'}}</td>
+						<td><input name="newpin_code2" type="password" size="6" /></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<input type="hidden" name="_csrf" value="{{ csrfToken }}">
+							<input type="button" name="btn" value="{{__ 'Return'}}" onclick="history.back();" />
+							<input type="submit" name="send" value="{{__ 'Update PIN'}}" />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>

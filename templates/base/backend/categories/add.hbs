@@ -1,0 +1,90 @@
+<form method="post" id="addCategory" action="/backoffice/categories/add">
+	<div class="site_title">
+		Thêm mới danh mục sản phẩm 
+		<div style="float:right;">
+			<input type="submit" name="create" value="{{__ 'Save'}}" />
+			<input type="submit" name="btn" form="addCategory" value="{{__ 'Close'}}" onclick="window.location='/backoffice/categories';" />
+		</div>
+	</div>
+	<div class="site_content">
+
+		{{#if sessionFlash.messages }}
+			{{#if sessionFlash.isArray}}
+				<div class="{{ sessionFlash.type}}_box">
+					{{#each sessionFlash.messages}}
+						{{this}}
+					{{/each}}
+				</div>
+			{{else}}
+				<div class="{{ sessionFlash.type}}_box">
+					{{sessionFlash.messages}}
+				</div>
+			{{/if}}
+		{{/if}}
+		
+		
+			<table width="100%" class="widget-tbl">
+
+				<tr>
+					<td width="150">Tên danh mục</td>
+					<td><input name="name" type="text" id="name" value="{{req.body.name}}" style="width:98%;" /></td>
+				</tr>
+				{{#if hasId}}
+					<input type="hidden" name="category" value="{{theid}}" />
+				{{else}}
+				<tr>
+					<td>Thuộc danh mục</td>
+					<td>
+						<div class="widget-content" style="background:#FFFFFF; overflow:auto; height:350px;">
+							<input class="toplevel" type="radio" name="category" value="1" checked /> <strong>Là danh mục chính</strong><br /> 
+							{{!-- LEVEL 1 --}}
+							{{#each categories}}
+									<input type="radio" name="category" value="{{this._id}}:{{this.level}}" class="checkall" /> {{this.name}}<br />
+									{{!-- LEVEL 2 --}}
+									{{#each ../childs}}
+										{{#ifCond this.level "===" 2}}
+											{{#indexOf ../this._id this.child}}
+												<input type="radio" name="category" value="{{this._id}}:{{this.level}}" class="checkall" style="margin-left:30px;" /> {{this.name}}<br />
+												{{!-- LEVEL 3 --}}
+												{{#each ../../childs}}
+													{{#ifCond this.level "===" 3}}
+														{{#indexOf ../this._id this.child}}
+															<input type="radio" name="category" value="{{this._id}}:{{this.level}}" class="checkall" style="margin-left:60px;" /> {{this.name}}<br />
+															{{!-- LEVEL 4 --}}
+															{{#each ../../../childs}}
+																{{#ifCond this.level "===" 4}}
+																	{{#indexOf ../this._id this.child}}
+																		<input type="radio" name="category" value="{{this._id}}:{{this.level}}" class="checkall" style="margin-left:90px;" disabled /> {{this.name}}<br />
+																	{{/indexOf}}
+																{{/ifCond}}
+															{{/each}}
+														{{/indexOf}}
+													{{/ifCond}}
+												{{/each}}
+											{{/indexOf}}
+										{{/ifCond}}
+									{{/each}}
+							{{/each}}
+						</div>
+					</td>
+				</tr>
+				{{/if}}
+				<tr>
+					<td>Trạng thái</td>
+					<td>
+						<select name="status">
+							<option value="ACTIVE">Kích hoạt</option>
+							<option value="INACTIVE">Tạm dừng</option>
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td>
+						<input type="hidden" name="_csrf" value="{{ csrfToken }}">
+					</td>
+				</tr>
+			</table>
+	</div>
+</form>

@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{{settings.site_name}} - {{pagetitle}}</title>
+	<link href="/backend/css/{{settings.adminLoginTemplate}}.css" rel="stylesheet" type="text/css" />
+	<link href="/backend/css/global.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		function picknumber(n) {
+			var pin_code = document.getElementById("pin_code");
+			var pinc = document.getElementById("pinc");
+			pinc.value = pinc.value + "*";
+			pin_code.value = pin_code.value + n;
+		}
+		function resetpicker() {
+			var pinc = document.getElementById("pinc");
+			var pin_code = document.getElementById("pin_code");
+			pinc.value = '';
+			pin_code.value = '';
+		}
+	</script>
+</head>
+
+<body>
+	<div id="wrapper">
+		<div class="box corner-all">
+			<div id="logo"></div>
+			<div class="clear"></div>
+			<div class="title corner-all">{{settings.site_name}} {{settings.site_version}} Admin Control Panel</div>
+			<div>
+				{{#if hasErrors}}
+				<div class="error_box">
+					{{#each messages}}
+					{{{this}}}
+					{{/each}}
+				</div>
+				{{/if}}
+				<form method="post" action="/backoffice/login">
+					<table cellpadding="4" cellspacing="4" align="center">
+						<tr>
+							<td align="right">Địa chỉ Email:</td>
+							<td><input type="text" name="email" style="width:270px" value="cnttlc@gmail.com" /></td>
+						</tr>
+						<tr>
+							<td align="right">Mật khẩu:</td>
+							<td><input type="password" name="password" style="width:270px" value="123456" /></td>
+						</tr>
+						<tr>
+							<td align="right" valign="top">Mã PIN:</td>
+							<td>
+
+								<div class="pincode_box" id="virtualKeyboad">
+									<script type="text/javascript">
+										function shuffle(array) {
+											var currentIndex = array.length, temporaryValue, randomIndex;
+											while (0 !== currentIndex) {
+												randomIndex = Math.floor(Math.random() * currentIndex);
+												currentIndex -= 1;
+												temporaryValue = array[currentIndex];
+												array[currentIndex] = array[randomIndex];
+												array[randomIndex] = temporaryValue;
+											}
+											return array;
+										}
+
+										var numArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+										numArr = shuffle(numArr);
+										var button = "";
+										for (var number in numArr) {
+											button += '<span class="pincode_button" onclick = "picknumber(' + numArr[number] + ');"> ' + numArr[number] + ' </span>';
+										}
+										button += '<span class="pincode_clear" onclick= "resetpicker();"> Xóa </span>';
+										document.getElementById("virtualKeyboad").innerHTML = button;
+									</script>
+
+								</div>
+								<input type="password" name="pinc" id="pinc" disabled="disabled" style="width:160px" />
+								<input type="hidden" name="pin_code" id="pin_code" value="123456" />
+								<input type="hidden" name="_csrf" value="{{csrfToken}}" />
+								<div style="margin-top:10px"><input type="submit" name="btn" value="Đăng nhập" /></div>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

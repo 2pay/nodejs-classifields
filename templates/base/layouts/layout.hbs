@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" dir="{{lang_dir}}">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="/images/favicon.png" rel="icon" />
+	<title>{{settings.site_title}} - {{pagetitle}}</title>
+	<meta name="description" content="{{settings.site_description}}">
+	<!-- CSS Part Start-->
+	{{> header-styles}}
+	<!-- CSS Part End-->
+</head>
+
+<body>
+	<div class="wrapper-wide">
+		{{> header}} {{{body}}}
+		<!--Footer Start-->
+		{{> footer}}
+		<!--Footer End-->
+		<!-- Facebook Side Block Start -->
+		{{> facebook-side-block}}
+		<!-- Facebook Side Block End -->
+		<!-- Twitter Side Block Start -->
+		{{> twitter-side-block}}
+		<!-- Twitter Side Block End -->
+		<!-- Video Side Block Start -->
+		{{> video-side-block}}
+		<!-- Video Side Block End -->
+		<!-- Custom Side Block Start -->
+		{{> custom-side-block}}
+		<!-- Custom Side Block End -->
+	</div>
+	<!-- JS Part Start-->
+	{{> footer-scripts}}
+	<!-- JS Part End-->
+</body>
+</html>

@@ -1,0 +1,79 @@
+{ 
+    "_id" : ObjectId("5a2522bfac6ae608cc4ec934"), 
+    "updatedAt" : ISODate("2017-12-04T10:26:07.362+0000"), 
+    "createdAt" : ISODate("2017-12-04T10:26:07.362+0000"), 
+    "name" : "Product 04", 
+    "slug" : "product-04", 
+    "desc" : "<p>Product 04</p>\r\n", 
+    "price" : NumberInt(120000), 
+    "sales" : NumberInt(100000), 
+    "sku" : "PROD004", 
+    "status" : "Active", 
+    "thumb" : [
+        {
+            "url" : "product-loi-khuyen-cho-phai-dep-mang-giay-cao-got-11512383167288.jpg", 
+            "_id" : ObjectId("5a2522bfac6ae608cc4ec936")
+        }, 
+        {
+            "url" : "product-loi-khuyen-cho-phai-dep-mang-giay-cao-got-11512383167288.jpg", 
+            "_id" : ObjectId("5a2522bfac6ae608cc4ec935")
+        }
+    ], 
+    "categories" : [
+        ObjectId("5a1c34ff19301f3354876880")
+    ], 
+    "poster" : [
+        ObjectId("5a0e3d5bd8d9d91ef8e0d461")
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a2523cfd7cd751b94ca3000"), 
+    "updatedAt" : ISODate("2017-12-04T10:30:39.669+0000"), 
+    "createdAt" : ISODate("2017-12-04T10:30:39.669+0000"), 
+    "name" : "Product 05", 
+    "slug" : "product-05", 
+    "desc" : "<p>Product 05</p>\r\n", 
+    "price" : NumberInt(180000), 
+    "sales" : NumberInt(1070000), 
+    "sku" : "PROD005", 
+    "status" : "Active", 
+    "thumb" : [
+        {
+            "url" : "product-22894620-1958343184435810-1501461875-n1512383439645.jpg", 
+            "_id" : ObjectId("5a2523cfd7cd751b94ca3001")
+        }
+    ], 
+    "categories" : [
+        ObjectId("5a1c34ff19301f3354876880")
+    ], 
+    "poster" : [
+        ObjectId("5a0e3d5bd8d9d91ef8e0d461")
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a2525652c13ad14801f6a5a"), 
+    "updatedAt" : ISODate("2017-12-04T10:37:25.147+0000"), 
+    "createdAt" : ISODate("2017-12-04T10:37:25.147+0000"), 
+    "name" : "Product 06", 
+    "slug" : "product-06", 
+    "desc" : "<p>Product 06&nbsp;Product 06</p>\r\n", 
+    "price" : NumberInt(220000), 
+    "sales" : NumberInt(200000), 
+    "sku" : "PROD006", 
+    "status" : "Active", 
+    "thumb" : [
+        {
+            "url" : "product-22895036-1958343194435809-2072302862-n1512383845122.jpg", 
+            "_id" : ObjectId("5a2525652c13ad14801f6a5b")
+        }
+    ], 
+    "categories" : [
+        ObjectId("5a1c34ff19301f3354876880")
+    ], 
+    "poster" : [
+        ObjectId("5a0e3d5bd8d9d91ef8e0d461")
+    ], 
+    "__v" : NumberInt(0)
+}
