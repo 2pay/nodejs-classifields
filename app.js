@@ -40,7 +40,7 @@ if (ip === "127.0.0.1") {
     mongoose.Promise = global.Promise;
 }
 
-mongoose.connect(configDB.connectStr, { useMongoClient: true });
+mongoose.connect(configDB.connectStr, { useNewUrlParser: true });
 mongoose.connection.on('error', function(err) {
     console.log('Lỗi kết nối đến CSDL: ' + err);
 });
