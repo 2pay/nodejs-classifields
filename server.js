@@ -1,31 +1,57 @@
 #!/usr/bin/env node
 
+/**
+ * Module dependencies.
+ */
+
 var app = require('./app');
-var debug = require('debug')('wefuny:server');
+var debug = require('debug')('classield:server');
 var http = require('http');
 
-//var port = normalizePort(process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || '3000');
-//var ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-port = normalizePort(process.env.PORT || '3000');
-//var ip = process.env.IP || '127.0.0.1';
-//app.set('port', port);
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
 
 var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
 function normalizePort(val) {
     var port = parseInt(val, 10);
+
     if (isNaN(port)) {
+        // named pipe
         return val;
     }
+
     if (port >= 0) {
+        // port number
         return port;
     }
+
     return false;
 }
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
 
 function onError(error) {
     if (error.syscall !== 'listen') {

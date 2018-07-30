@@ -1,0 +1,66 @@
+<div class="container">
+
+    <div class="col-sm-6 col-sm-offset-3">
+        
+        <form action="/thanh-vien/dang-ky" method="POST" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <legend>{{__ 'Member Register'}} <span class="pull-right"><a href="/thanh-vien/dang-nhap">{{__ 'I already have an account'}}</a></span></legend>
+                </div>
+        
+                <div class="form-group">
+                    <legend>{{__ 'Create a new profile'}}</legend>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="firstname">First Name</label>
+                            <input type="text" name="firstname" class="form-control" id="firstname" placeholder="{{__ 'Please input first name'}}" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="lastname">Last Name</label>
+                            <input type="text" name="lastname" class="form-control" id="lastname" placeholder="{{__ 'Please input last name'}}" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">{{__ 'Email Address'}}</label>
+                    <input type="text" name="email" class="form-control" id="email" placeholder="{{__ 'Please input email address'}}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">{{__ 'Password'}}</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="{{__ 'Please input password'}}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmpassword">{{__ 'Confirm Password'}}</label>
+                    <input type="password" name="confirmpassword" class="form-control" id="confirmpassword" placeholder="{{__ 'Please retype password'}}" />
+                </div>
+
+                <div class="form-group">
+                    <legend>{{__ 'Newsletter Register'}}</legend>
+                </div>
+
+                <div class="form-group">
+                    <label for="newsletter">{{__ 'Do you want to subscribe to our promotional emails?'}}</label>
+                    <br />
+                    <input type="radio" name="newsletter" value="1" checked="checked" /> {{__ 'Yes'}}
+                    <input type="radio" name="newsletter" value="0" /> {{__ 'No'}}
+                </div>
+        
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label class="pull-left">
+                            <input type="checkbox" name="accept" value="1" /> {{{__ 'I have read and agree to the Terms'}}}
+                        </label>
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+                        <button type="submit" class="btn btn-primary pull-right">{{__ 'Register'}}</button>
+                    </div>
+                </div>
+        </form>
+        
+    </div>
+
+</div>
