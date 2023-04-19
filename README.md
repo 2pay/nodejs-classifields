@@ -51,4 +51,4 @@ dbStr: 'mongodb://mongo_host:mongo_port/mongo_dataname'
 + **mongo_dataname:** your name of databse mongo
 
 ## Youtube Part
-* Full Playlist: (https://www.youtube.com/playlist?list=PLbiY3V0xEzADZEW9dUP3rFI0J5BXMmPxo)
+* First Part: (https://www.youtube.com/watch?v=3SZ-eIUllbc)
