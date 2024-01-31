@@ -30,23 +30,24 @@ passport.use('local.regsiter', new LocalStrategy({
     passReqToCallback: true
 }, function(req, email, password, done) {
     // Validator các input từ trang đăng ký
-    req.checkBody('firstname', req.__('Please input first name.')).notEmpty();
-    req.checkBody('lastname', req.__('Please input last name.')).notEmpty();
-    req.checkBody('email', req.__('Email address invalid, please check again.')).notEmpty().isEmail();
-    req.checkBody('password', req.__('Password invalid, password must be at least %d characters or more', settings.passwordLength)).notEmpty().isLength({
+    req.check('firstname', req.__('Please input first name.')).notEmpty();
+    req.check('lastname', req.__('Please input last name.')).notEmpty();
+    req.check('email', req.__('Email address invalid, please check again.')).notEmpty().isEmail();
+    req.check('password', req.__('Password invalid, password must be at least %d characters or more', settings.passwordLength)).notEmpty().isLength({
         min: settings.passwordLength
     });
-    req.checkBody('password', req.__('Confirm password is not the same, please check again.')).equals(req.body.confirmpassword);
-    req.checkBody('accept', req.__('You have to accept with our terms to continute.')).equals("1");
+    req.check('password', req.__('Confirm password is not the same, please check again.')).equals(req.body.confirmpassword);
+    req.check('accept', req.__('You have to accept with our terms to continute.')).equals("1");
 
-    var errors = req.validationErrors();
-    if (errors) {
-        var messages = [];
-        errors.forEach(function(error) {
-            messages.push(error.msg);
-        });
-        return done(null, false, req.flash('error', messages));
-    }
+    req.getValidationResult().then(function (result) {
+        if (!result.isEmpty()) {
+            let messages = [];
+            const errors = result.array().map(function (error) {
+                messages.push(error.msg);
+            });
+            return done(null, false, req.flash('error', messages));
+        } 
+    });
 
     Member.findOne({
         'local.email': email
@@ -94,18 +95,18 @@ passport.use('local.login', new LocalStrategy({
     passwordField: 'password', // tên của input mật khẩu
     passReqToCallback: true
 }, function(req, email, password, done) {
-    req.checkBody('email', req.__('Invalid email address, please try again.')).notEmpty().isEmail();
-    req.checkBody('password', req.__('Incorrect password, please try again.')).notEmpty();
-
-    var errors = req.validationErrors();
-
-    if (errors) {
-        var messages = [];
-        errors.forEach(function(error) {
-            messages.push(error.msg);
-        });
-        return done(null, false, req.flash('error', messages));
-    }
+    req.check('email', req.__('Invalid email address, please try again.')).notEmpty().isEmail();
+    req.check('password', req.__('Incorrect password, please try again.')).notEmpty();
+    
+    req.getValidationResult().then(function (result) {
+        if (!result.isEmpty()) {
+            let messages = [];
+            const errors = result.array().map(function (error) {
+                messages.push(error.msg);
+            });
+            return done(null, false, req.flash('error', messages));
+        } 
+    });
 
     // Check member input
     Member.findOne({
@@ -360,19 +361,19 @@ passport.use('backend.login', new LocalStrategy({
     passReqToCallback: true
 }, function(req, email, password, done) {
 
-    req.checkBody('email', req.__('Email address is invalid, please check again')).notEmpty().isEmail();
-    req.checkBody('password', req.__('Please input your password')).notEmpty();
-    req.checkBody('pin_code', req.__('Please input your pincode')).notEmpty();
+    req.check('email', req.__('Email address is invalid, please check again')).notEmpty().isEmail();
+    req.check('password', req.__('Please input your password')).notEmpty();
+    req.check('pin_code', req.__('Please input your pincode')).notEmpty();
 
-    var errrors = req.validationErrors();
-
-    if (errrors) {
-        var messages = [];
-        errrors.forEach(function(error) {
-            messages.push(error.msg);
-        });
-        return done(null, false, req.flash('error', messages));
-    }
+    req.getValidationResult().then(function (result) {
+        if (!result.isEmpty()) {
+            let messages = [];
+            const errors = result.array().map(function (error) {
+                messages.push(error.msg);
+            });
+            return done(null, false, req.flash('error', messages));
+        } 
+    });
 
     // Find member
     Member.findOne({
