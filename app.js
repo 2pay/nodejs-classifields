@@ -21,7 +21,7 @@ var routerMember = require('./routes/member');
 
 var app = express();
 
-mongoose.connect(database.dbStr, {useMongoClient: true});
+mongoose.connect(database.dbStr, { useUnifiedTopology: true, useNewUrlParser: true});
 mongoose.connection.on('error', function(err) {
     console.log('Error connect to Database: ' + err);
 });
