@@ -6,6 +6,16 @@
                 <div class="form-group">
                     <legend>{{__ 'Member Register'}} <span class="pull-right"><a href="/thanh-vien/dang-nhap">{{__ 'I already have an account'}}</a></span></legend>
                 </div>
+
+                {{#if hasErrors}}
+                    <div class="row">
+                        <div class="alert alert-danger">
+                            {{#each messages}}
+                            <p>{{this}}</p>
+                            {{/each}}
+                        </div>
+                    </div>
+                {{/if}}
         
                 <div class="form-group">
                     <legend>{{__ 'Create a new profile'}}</legend>
