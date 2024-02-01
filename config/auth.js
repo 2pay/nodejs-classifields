@@ -6,8 +6,8 @@ module.exports = {
         'profileFields': ['birthday', 'emails', 'first_name', 'last_name', 'gender']
     },
     'googleAuth': {
-        'clientID': '406353062895-ifeg033ovbdmhaisbrdb7vfh7aagh82k.apps.googleusercontent.com',
-        'clientSecret': 'hY1D1Rv0ysYfsvIoo1cW1KgQ',
+        'clientID': 'your-client-id',
+        'clientSecret': 'your-client-secret',
         'callbackURL': '../thanh-vien/google/callback'
     }
 };
