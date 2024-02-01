@@ -1,0 +1,33 @@
+.btn-fb {
+    color: #fff;
+    background-color: #3b5998;
+    border: 1px solid #3b5998;
+}
+
+.btn-gg {
+    color: #fff;
+    background-color: #d62d20;
+    border: 1px solid #d62d20;
+}
+
+.btn-fb:hover,
+.btn-fb:focus,
+.btn-fb:active {
+    color: #fff;
+    background-color: #5775b5;
+    border: 1px solid #5775b5;
+    outline: none
+}
+
+.btn-gg:hover,
+.btn-gg:focus,
+.btn-gg:active {
+    color: #fff;
+    background-color: #e4473b;
+    border: 1px solid #e4473b;
+    outline: none
+}
+
+.loginOr {
+    margin: 30px 0 30px 0;
+}

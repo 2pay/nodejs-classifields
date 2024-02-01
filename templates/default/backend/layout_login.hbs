@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{pageTitle}}</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <style type="css/stylesheet">
+
+            form legend {
+                font-size: 1.5em !important;
+            }
+
+            #vitualKeyboad {
+                margin-bottom: 20px !important;
+            }
+
+            #vitualKeyboad > span {
+                margin-right: 2px !important;
+            }
+
+        </style>
+
+        <script type="text/javascript">
+
+            function picknumber(num) {
+                var pin_code = document.getElementById("pin_code");
+                var pinc = document.getElementById("pinc");
+                pin_code.value = pin_code.value + num;
+                pinc.value = pinc.value + "*";
+            }
+
+            function resetpicker() {
+                var pin_code = document.getElementById("pin_code");
+                var pinc = document.getElementById("pinc");
+                pin_code.value = '';
+                pinc.value = '';
+            }
+
+        </script>
+    </head>
+    <body>
+
+        <div id="container">
+
+            <div class="col-md-4 col-md-offset-4">
+                <h1 class="text-center" style="margin: 50px 0 50px 0;">Classifield Project</h1>
+
+                <form action="/backoffice/login" method="POST" role="form">
+                    <legend>Administrator Login Panel</legend>
+
+                        {{#if hasErrors}}
+                        <div class="alert alert-danger">
+                            {{#each messages}}
+                                {{this}}
+                            {{/each}}
+                        </div>
+                        {{/if}}
+
+                    <div class="form-group">
+                        <label for="">{{__ 'Email address'}}</label>
+                        <input type="text" class="form-control" name="email" id="email" placeholder="{{__ 'Input your username'}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">{{__ 'Password'}}</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="{{__ 'Input your password'}}">
+                    </div>
+                
+                    <div class="form-group">
+                        <label>Pin Code</label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="text" name="pinc" disabled="disabled" class="form-control" id="pinc">
+                                <input type="hidden" name="pin_code" id="pin_code" value="" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="vitualKeyboad" style="margin-top: 20px;">
+                                    <script type="text/javascript">
+                                        function shuffle(array) {
+                                            var currentIndex = array.length, tempValue, randomIndex;
+                                            while (0 != currentIndex) {
+                                                randomIndex = Math.floor(Math.random() * currentIndex);
+                                                currentIndex -= 1;
+                                                tempValue = array[currentIndex];
+                                                array[currentIndex] = array[randomIndex];
+                                                array[randomIndex] = tempValue;
+                                            }
+                                            return array;
+                                        }
+
+                                        var numArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+                                        numArr = shuffle(numArr);
+                                        var button = "";
+                                        for (var number in numArr) {
+                                            button += '<span style="margin-right: 3px;" onclick="picknumber(' + numArr[number] + ');" class="btn btn-default">' + numArr[number] + '</span>';
+                                        }
+                                        button += '<span style="margin-top: 2px;" onclick="resetpicker();" id="clear" class="btn btn-danger">Xóa</span>';
+                                        document.getElementById("vitualKeyboad").innerHTML = button;
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+                    <button type="submit" class="btn btn-primary pull-right">Admin Login >></button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
