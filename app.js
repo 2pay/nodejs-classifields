@@ -32,7 +32,7 @@ require('./config/passport');
 var hbsConfig = expHbs.create({
     helpers: require('./helpers/handlebars.js').helpers,
     layoutsDir: path.join(__dirname, '/templates/' + settings.defaultTemplate + '/layouts'),
-    defaultLayout: path.join(__dirname, '/templates/' + settings.defaultTemplate + '/layouts/layout'),
+    defaultLayout: 'layout',
     partialsDir: path.join(__dirname, '/templates/' + settings.defaultTemplate + '/partials'),
     extname: '.hbs'
 });
