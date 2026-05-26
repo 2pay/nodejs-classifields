@@ -12,7 +12,7 @@ This repository started as a training project and has been updated to run on a m
 - Optional Facebook and Google OAuth login
 - Admin login flow with password + PIN code
 - Handlebars templates
-- English and Vietnamese localization
+- English, Vietnamese, Chinese, Korean, and Japanese localization
 - Session-based authentication
 - CSRF protection on form routes
 
@@ -106,6 +106,9 @@ Open:
 - `/` - home page
 - `/en` - switch language to English
 - `/vi` - switch language to Vietnamese
+- `/zh` - switch language to Chinese
+- `/ko` - switch language to Korean
+- `/ja` - switch language to Japanese
 
 ### Member Area
 

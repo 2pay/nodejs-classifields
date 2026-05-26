@@ -51,9 +51,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 i18n.configure({
-    locales: ['en', 'vi'],
+    locales: ['en', 'vi', 'zh', 'ko', 'ja'],
     register: global,
-    fallbacks: { 'vi': 'en' },
+    fallbacks: { vi: 'en', zh: 'en', ko: 'en', ja: 'en' },
     cookie: 'language', // Tên của cookie trên browser nhé
     queryParameter: 'lang', // Đây là params trên url dùng thay đổi ngôn ngữ 
     defaultLocale: 'en', //Ngôn ngữ mặc định khi init nó sẽ tự tìm các chuỗi nằm trong hàm __ và __n để tự thêm vào file json
@@ -82,6 +82,8 @@ app.use(function(req, res, next) {
 
 app.use(function(req, res, next) {
     res.locals.clanguage = req.getLocale(); // Ngôn ngữ hiện tại
+    res.locals.lang = req.getLocale();
+    res.locals.lang_dir = 'ltr';
     res.locals.languages = i18n.getLocales(); // Danh sách ngôn ngữ khai báo trong phần cấu hình bên trên.
     res.locals.settings = settings;
     res.locals.logged = req.isAuthenticated();

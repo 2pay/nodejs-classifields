@@ -51,10 +51,10 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/images/{{clanguage}}.png"> {{@root.__ clanguage}} <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{@root.__ clanguage}} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             {{#each languages}}
-                            <li><a onclick="window.location.href='/{{this}}'" href="#"><img src="/images/{{this}}.png"> {{@root.__ this}}</a></li>
+                            <li><a onclick="window.location.href='/{{this}}'" href="#">{{@root.__ this}}</a></li>
                             {{/each}}
                         </ul>
                     </li>
