@@ -36,8 +36,13 @@ exports.get_login = function(req, res, next) {
 };
 
 exports.get_logout = function(req, res, next) {
-    req.logout();
-    res.redirect('/');
+    req.logout(function(err) {
+        if (err) {
+            return next(err);
+        }
+
+        res.redirect('/');
+    });
 };
 
 // GET Login
@@ -49,7 +54,7 @@ exports.post_login = passport.authenticate('local.login', {
 
 // GET Facebook login
 exports.get_facebook_login = passport.authenticate('facebook', {
-    scope: ['email, public_profile']
+    scope: ['email', 'public_profile']
 });
 
 // GET Facebook login

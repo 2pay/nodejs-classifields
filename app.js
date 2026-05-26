@@ -4,13 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var i18n = require('i18n');
-var bodyParser = require('body-parser');
 var expHbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
-var validator = require('express-validator');
 
 var settings = require('./config/settings');
 var database = require('./config/database');
@@ -21,9 +19,11 @@ var routerMember = require('./routes/member');
 
 var app = express();
 
-mongoose.connect(database.dbStr, { useUnifiedTopology: true, useNewUrlParser: true});
+mongoose.connect(database.dbStr).catch(function(err) {
+    console.error('Error connect to Database: ' + err);
+});
 mongoose.connection.on('error', function(err) {
-    console.log('Error connect to Database: ' + err);
+    console.error('Error connect to Database: ' + err);
 });
 
 require('./config/passport');
@@ -31,23 +31,22 @@ require('./config/passport');
 // view engine setup
 var hbsConfig = expHbs.create({
     helpers: require('./helpers/handlebars.js').helpers,
-    layoutsDir: path.join(__dirname, '/templates/' + settings.defaultTemplate + '/layouts'),
+    layoutsDir: path.join(__dirname, 'templates', settings.defaultTemplate, 'layouts'),
     defaultLayout: 'layout',
-    partialsDir: path.join(__dirname, '/templates/' + settings.defaultTemplate + '/partials'),
+    partialsDir: path.join(__dirname, 'templates', settings.defaultTemplate, 'partials'),
     extname: '.hbs'
 });
 
-app.engine('.hbs', hbsConfig.engine);
-app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, '/templates/' + settings.defaultTemplate));
+app.engine('hbs', hbsConfig.engine);
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'templates', settings.defaultTemplate));
 
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(validator());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

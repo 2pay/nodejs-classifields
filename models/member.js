@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcryptjs');
 var Schema = mongoose.Schema;
 
 var memberSchema = new Schema({
@@ -9,10 +9,10 @@ var memberSchema = new Schema({
         phone: String,
         company: String,
         address: String,
-        cities: [{ type: Schema.ObjectId, ref: 'City' }], // store array city _id
-        countries: [{ type: Schema.ObjectId, ref: 'Country' }], // store array country _id
+        cities: [{ type: Schema.ObjectId, ref: 'City' }],
+        countries: [{ type: Schema.ObjectId, ref: 'Country' }]
     },
-    local: { // Use local
+    local: {
         email: String,
         password: String,
         adminPin: String,
@@ -21,66 +21,49 @@ var memberSchema = new Schema({
         resetPasswordToken: String,
         resetPasswordExpires: Date
     },
-    facebook: { // Use passport facebook
+    facebook: {
         id: String,
         token: String,
         email: String,
         name: String,
         photo: String
     },
-    google: { // Use passport google
+    google: {
         id: String,
         token: String,
         email: String,
         name: String,
         photo: String
     },
-    newsletter: Boolean, // True or false
-    roles: String, //ADMIN, MOD, MEMBER, VIP
-    status: String //ACTIVE, INACTIVE, SUSPENDED
+    newsletter: Boolean,
+    roles: String,
+    status: String
 }, {
     timestamps: true
 });
 
-
-// Mã hóa mật khẩu
 memberSchema.methods.encryptPassword = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
-}
+};
 
-// Giải mã mật khẩu
 memberSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
-}
+    return Boolean(this.local && this.local.password) && bcrypt.compareSync(password, this.local.password);
+};
 
-// Valid Pincode
 memberSchema.methods.validPincode = function(pincode) {
-    return bcrypt.compareSync(pincode, this.local.adminPin);
-}
+    return Boolean(this.local && this.local.adminPin) && bcrypt.compareSync(pincode, this.local.adminPin);
+};
 
-// Valid Pincode
 memberSchema.methods.isGroupAdmin = function(checkRole) {
-    if (checkRole === "ADMIN") {
-        return true;
-    } else {
-        return false;
-    }
-}
+    return checkRole === 'ADMIN';
+};
 
 memberSchema.methods.isInActivated = function(checkStatus) {
-    if (checkStatus === "INACTIVE") {
-        return true;
-    } else {
-        return false;
-    }
+    return checkStatus === 'INACTIVE';
 };
 
 memberSchema.methods.isSuspended = function(checkStatus) {
-    if (checkStatus === "SUSPENDED") {
-        return true;
-    } else {
-        return false;
-    }
+    return checkStatus === 'SUSPENDED';
 };
 
 module.exports = mongoose.model('Member', memberSchema);

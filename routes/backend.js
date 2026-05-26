@@ -1,4 +1,4 @@
-var csrf = require('csurf');
+var csrf = require('@dr.pogodin/csurf');
 var express = require('express');
 var router = express.Router();
 

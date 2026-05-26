@@ -8,8 +8,13 @@ exports.get_dashboard = function(req, res, next) {
 };
 
 exports.get_logout = function(req, res, next) {
-    req.logout();
-    res.redirect('/backoffice/login');
+    req.logout(function(err) {
+        if (err) {
+            return next(err);
+        }
+
+        res.redirect('/backoffice/login');
+    });
 };
 
 exports.login_get = function(req, res, next) {
@@ -26,7 +31,7 @@ exports.login_get = function(req, res, next) {
 exports.login_post = passport.authenticate('backend.login', {
     successRedirect: '/backoffice',
     failureRedirect: '/backoffice/login',
-    badRequestMesseage: 'Please input all fields required.',
+    badRequestMessage: 'Please input all fields required.',
     failureFlash: true
 });
 
