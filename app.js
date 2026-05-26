@@ -90,7 +90,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', index);
-app.use('/thanh-vien', routerMember);
+app.use('/member', routerMember);
 app.use('/backoffice', backendRoutes);
 
 // catch 404 and forward to error handler

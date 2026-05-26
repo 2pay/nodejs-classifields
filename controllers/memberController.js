@@ -1,6 +1,6 @@
 var passport = require('passport');
 
-exports.get_regsiter = function(req, res, next) {
+exports.get_register = function(req, res, next) {
     var messages = req.flash('error');
     res.render('frontend/member/register', {
         pageTitle: req.__('Member Register'),
@@ -11,14 +11,14 @@ exports.get_regsiter = function(req, res, next) {
 };
 
 // POST Register
-exports.post_regsiter = passport.authenticate('local.regsiter', {
-    successRedirect: '/thanh-vien/tai-khoan',
-    failureRedirect: '/thanh-vien/dang-ky',
+exports.post_register = passport.authenticate('local.register', {
+    successRedirect: '/member/dashboard',
+    failureRedirect: '/member/register',
     failureFlash: true
 });
 
-// GET Profile
-exports.get_profile = function(req, res, next) {
+// GET Dashboard
+exports.get_dashboard = function(req, res, next) {
     res.render('frontend/member/dashboard', {
         pageTitle: req.__('Dashboard')
     });
@@ -47,8 +47,8 @@ exports.get_logout = function(req, res, next) {
 
 // GET Login
 exports.post_login = passport.authenticate('local.login', {
-    successRedirect: '/thanh-vien/tai-khoan',
-    failureRedirect: '/thanh-vien/dang-nhap',
+    successRedirect: '/member/dashboard',
+    failureRedirect: '/member/login',
     failureFlash: true
 });
 
@@ -59,8 +59,8 @@ exports.get_facebook_login = passport.authenticate('facebook', {
 
 // GET Facebook login
 exports.get_facebook_login_callback = passport.authenticate('facebook', {
-    successRedirect: '/thanh-vien/tai-khoan',
-    failureRedirect: '/thanh-vien/dang-nhap'
+    successRedirect: '/member/dashboard',
+    failureRedirect: '/member/login'
 });
 
 // GET Google login
@@ -70,22 +70,22 @@ exports.get_google_login = passport.authenticate('google', {
 
 // GET Google login
 exports.get_google_login_callback = passport.authenticate('google', {
-    successRedirect: '/thanh-vien/tai-khoan',
-    failureRedirect: '/thanh-vien/dang-nhap'
+    successRedirect: '/member/dashboard',
+    failureRedirect: '/member/login'
 });
 
 exports.isLoggedIn = function(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/thanh-vien/dang-nhap');
+    res.redirect('/member/login');
 };
 
 exports.notLoggedIn = function(req, res, next) {
     if (!req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/thanh-vien/tai-khoan');
+    res.redirect('/member/dashboard');
 };
 
 exports.notLogin_use = function(req, res, next) {

@@ -8,25 +8,25 @@ router.use(csrfProtection);
 // Require Controller Module
 var member_controller = require('../controllers/memberController');
 
-/* GET Profile */
-router.get('/tai-khoan', member_controller.isLoggedIn, member_controller.get_profile);
+/* GET Member Dashboard */
+router.get('/dashboard', member_controller.isLoggedIn, member_controller.get_dashboard);
 
 /* GET Logout */
-router.get('/dang-thoat', member_controller.isLoggedIn, member_controller.get_logout);
+router.get('/logout', member_controller.isLoggedIn, member_controller.get_logout);
 
 router.use('/', member_controller.notLogin_use);
 
-/* GET Member Regsiter. */
-router.get('/dang-ky', member_controller.notLoggedIn, member_controller.get_regsiter);
+/* GET Member Register. */
+router.get('/register', member_controller.notLoggedIn, member_controller.get_register);
 
-/* POST Member Regsiter */
-router.post('/dang-ky', member_controller.post_regsiter);
-
-/* GET Member Login */
-router.get('/dang-nhap', member_controller.notLoggedIn, member_controller.get_login);
+/* POST Member Register */
+router.post('/register', member_controller.post_register);
 
 /* GET Member Login */
-router.post('/dang-nhap', member_controller.post_login);
+router.get('/login', member_controller.notLoggedIn, member_controller.get_login);
+
+/* POST Member Login */
+router.post('/login', member_controller.post_login);
 
 /* GET Facebook Login */
 router.get('/facebook', member_controller.get_facebook_login);

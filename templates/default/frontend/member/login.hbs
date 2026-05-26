@@ -2,10 +2,10 @@
 
     <div class="col-sm-6 col-sm-offset-3">
         
-        <form action="/thanh-vien/dang-nhap" method="POST" class="form-horizontal" role="form">
+        <form action="/member/login" method="POST" class="form-horizontal" role="form">
 
                 <div class="form-group">
-                    <legend>{{__ 'Member Login'}} <span class="pull-right"><a href="/thanh-vien/dang-ky">{{__ 'Create new account'}}</a></span></legend>
+                    <legend>{{__ 'Member Login'}} <span class="pull-right"><a href="/member/register">{{__ 'Create new account'}}</a></span></legend>
                 </div>
 
                  {{#if hasErrors}}
@@ -21,10 +21,10 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-6">
-                            <button onclick="window.location.href='/thanh-vien/facebook'" type="button" class="btn-fb btn btn-default col-sm-12">{{__ 'Login by Facebook'}}</button>
+                            <button onclick="window.location.href='/member/facebook'" type="button" class="btn-fb btn btn-default col-sm-12">{{__ 'Login by Facebook'}}</button>
                         </div>
                         <div class="col-sm-6">
-                            <button onclick="window.location.href='/thanh-vien/google'" type="button" class="btn-gg btn btn-default col-sm-12">{{__ 'Login by Google'}}</button>
+                            <button onclick="window.location.href='/member/google'" type="button" class="btn-gg btn btn-default col-sm-12">{{__ 'Login by Google'}}</button>
                         </div>
                     </div>
                 </div>

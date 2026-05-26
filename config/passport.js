@@ -121,7 +121,7 @@ passport.deserializeUser(function(sessionUser, done) {
     });
 });
 
-passport.use('local.regsiter', new LocalStrategy({
+passport.use('local.register', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
