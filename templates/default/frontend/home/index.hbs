@@ -1,2 +1,193 @@
-<h1>{{pageTitle}}</h1>
-<p>Welcome to {{pageTitle}}</p>
+<main class="vp-home">
+    <section class="vp-hero">
+        <div class="vp-hero__content">
+            <div class="vp-kicker">vprompt.video</div>
+            <h1>AI video prompt templates for creators who need better shots faster.</h1>
+            <p class="vp-hero__lead">
+                Discover structured prompt templates for cinematic scenes, product ads, social videos, characters, real estate, and brand stories across leading AI video tools.
+            </p>
+
+            <form class="vp-search" action="#" method="GET">
+                <span class="vp-search__icon">Search</span>
+                <input type="text" name="q" placeholder="Search cinematic product shots, anime scenes, real estate tours..." />
+                <button type="submit">Search prompts</button>
+            </form>
+
+            <div class="vp-quick-tags">
+                <span>Cinematic</span>
+                <span>Product Ads</span>
+                <span>Runway</span>
+                <span>Kling</span>
+                <span>Veo</span>
+            </div>
+        </div>
+
+        <aside class="vp-hero-panel">
+            <div class="vp-live-card">
+                <div class="vp-live-card__top">
+                    <span class="vp-status-dot"></span>
+                    Featured template
+                </div>
+                <h2>Luxury watch reveal</h2>
+                <p>Macro lens, brushed steel reflections, rotating hero product, dark studio background, premium commercial lighting.</p>
+                <div class="vp-live-card__meta">
+                    <span>Runway</span>
+                    <span>8s</span>
+                    <span>4.9 rating</span>
+                </div>
+            </div>
+
+            <div class="vp-hero-stats">
+                {{#each heroStats}}
+                <div>
+                    <strong>{{value}}</strong>
+                    <span>{{label}}</span>
+                </div>
+                {{/each}}
+            </div>
+        </aside>
+    </section>
+
+    <section class="vp-section vp-resource-stats">
+        <div class="vp-section-heading">
+            <div>
+                <span class="vp-eyebrow">Platform resources</span>
+                <h2>Templates, resources, tools, and members in one library</h2>
+            </div>
+        </div>
+
+        <div class="vp-resource-grid">
+            {{#each resourceStats}}
+            <article class="vp-resource-card">
+                <strong>{{value}}</strong>
+                <span>{{label}}</span>
+                <p>{{detail}}</p>
+            </article>
+            {{/each}}
+        </div>
+    </section>
+
+    <section class="vp-section">
+        <div class="vp-section-heading">
+            <div>
+                <span class="vp-eyebrow">Prompt templates</span>
+                <h2>Featured AI video prompts</h2>
+            </div>
+            <a href="/member/register" class="vp-link-button">Submit a prompt</a>
+        </div>
+
+        <div class="vp-template-grid">
+            {{#each promptTemplates}}
+            <article class="vp-template-card">
+                <div class="vp-card-top">
+                    <span class="vp-badge">{{badge}}</span>
+                    <span class="vp-category">{{category}}</span>
+                </div>
+                <h3>{{title}}</h3>
+                <p class="vp-prompt-preview">{{preview}}</p>
+
+                <dl class="vp-template-meta">
+                    <div>
+                        <dt>Tools</dt>
+                        <dd>{{tool}}</dd>
+                    </div>
+                    <div>
+                        <dt>Format</dt>
+                        <dd>{{duration}}</dd>
+                    </div>
+                    <div>
+                        <dt>Variables</dt>
+                        <dd>{{variables}}</dd>
+                    </div>
+                </dl>
+
+                <div class="vp-author-row">
+                    <div class="vp-avatar">{{initial}}</div>
+                    <div>
+                        <strong>{{author}}</strong>
+                        <span>{{authorRole}}</span>
+                    </div>
+                </div>
+
+                <div class="vp-card-footer">
+                    <span>{{saves}} saves</span>
+                    <span>{{rating}} rating</span>
+                </div>
+            </article>
+            {{/each}}
+        </div>
+    </section>
+
+    <section class="vp-section vp-library">
+        <div class="vp-section-heading">
+            <div>
+                <span class="vp-eyebrow">Explore library</span>
+                <h2>Browse by video goal</h2>
+            </div>
+        </div>
+
+        <div class="vp-category-grid">
+            {{#each categories}}
+            <a href="#" class="vp-category-card vp-category-card--{{accent}}">
+                <span>{{name}}</span>
+                <strong>{{count}} prompts</strong>
+            </a>
+            {{/each}}
+        </div>
+    </section>
+
+    <section class="vp-section vp-insights">
+        <div class="vp-creators">
+            <div class="vp-section-heading vp-section-heading--compact">
+                <div>
+                    <span class="vp-eyebrow">Creators</span>
+                    <h2>Top prompt authors</h2>
+                </div>
+            </div>
+
+            {{#each creators}}
+            <article class="vp-creator-row">
+                <div class="vp-avatar">{{initial}}</div>
+                <div>
+                    <strong>{{name}}</strong>
+                    <span>{{title}}</span>
+                </div>
+                <div class="vp-creator-stats">
+                    <span>{{prompts}} prompts</span>
+                    <span>{{saves}} saves</span>
+                </div>
+            </article>
+            {{/each}}
+        </div>
+
+        <div class="vp-trending">
+            <div class="vp-section-heading vp-section-heading--compact">
+                <div>
+                    <span class="vp-eyebrow">Trending now</span>
+                    <h2>Latest saved prompts</h2>
+                </div>
+            </div>
+
+            <div class="vp-trending-list">
+                {{#each trendingPrompts}}
+                <article>
+                    <div>
+                        <strong>{{title}}</strong>
+                        <span>{{category}} &middot; {{tool}}</span>
+                    </div>
+                    <em>{{saves}}</em>
+                </article>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+
+    <section class="vp-cta">
+        <div>
+            <span class="vp-eyebrow">Build the library</span>
+            <h2>Share prompt templates with a global AI video community.</h2>
+            <p>Add structured prompts, variables, tool notes, example outputs, creator details, and usage tips so other creators can generate better videos faster.</p>
+        </div>
+        <a href="/member/register">Create creator profile</a>
+    </section>
+</main>

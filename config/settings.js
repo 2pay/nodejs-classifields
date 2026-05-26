@@ -1,5 +1,5 @@
 var settings = {
-    siteName: 'Classifield Website',
+    siteName: 'vprompt.video',
     defaultTemplate: 'default',
     secured_key: '06vUSNEzq1z9U476UrMEx7xIOPGYfu2m',
     passwordLength: 6,
